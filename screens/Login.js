@@ -5,6 +5,8 @@ import { Platform } from "react-native";
 import FormInput from "../components/FormInput";
 import FormButton from "../components/FormButton";
 import SocialMediaButton from "../components/SocialMediaButton";
+import BouncyCheckbox from "react-native-bouncy-checkbox";
+import Divider from "react-native-divider";
 // import LinearGradient from "react-native-linear-gradient";
 // Implement & Import AuthContext
 
@@ -12,6 +14,7 @@ import SocialMediaButton from "../components/SocialMediaButton";
 export default function Login({navigation}) {
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
+    const [keepLoggedIn, setKeepLoggedIn] = useState("false");
 
     return (
         <>
@@ -19,37 +22,61 @@ export default function Login({navigation}) {
         {Platform.OS === 'android' ? (
             <SafeAreaView style={styles.containerSafeAreaAndroid}>
                 <Image style={styles.LogoImage} source={require("../assets/images/Ruby_On_Rails_Logo.svg.png")}/>
+                <View>
+                    <FormInput 
+                        labelValue={email}
+                        onChangeText={(userEmail) => setEmail(userEmail)}
+                        placeHolderText="Email"
+                        iconType="user"
+                        keyboardType="email-address"
+                        autoCapitalize="none"
+                        autoCorrect={false}
+                    />
 
-                <FormInput 
-                    labelValue={email}
-                    onChangeText={(userEmail) => setEmail(userEmail)}
-                    placeHolderText="Email"
-                    iconType="user"
-                    keyboardType="email-address"
-                    autoCapitalize="none"
-                    autoCorrect={false}
-                />
-
-                <FormInput 
-                    labelValue={password}
-                    onChangeText={(userPassword) => setPassword(userPassword)}
-                    placeHolderText="Password"
-                    iconType="lock"
-                    secureTextEntry={true}
-                />
+                    <FormInput 
+                        labelValue={password}
+                        onChangeText={(userPassword) => setPassword(userPassword)}
+                        placeHolderText="Password"
+                        iconType="lock"
+                        secureTextEntry={true}
+                    />
+                    <View style={{flexDirection:"row", justifyContent:"flex-start", alignItems:"center", margin:5}}>
+                        <BouncyCheckbox 
+                            iconStyle={{borderColor: "#5865F2", borderRadius: 0}}
+                            fillColor="#5865F2"
+                            onPress={(checkboxValue) => setKeepLoggedIn(checkboxValue)} // implement Keep Me Logged In. 
+                        />
+                        <Text style={{marginEnd:10, color:"white"}}>Keep me logged in</Text>
+                    </View>
+                </View>
 
                 <FormButton 
                     buttonTitle="Sign In"
                     onPress={() => {}} // implement Login - AuthContext
                 />
 
-                <TouchableOpacity style={styles.forgot_button} onPress={() => {}}>
+                {/* <TouchableOpacity style={styles.forgot_button} onPress={() => {}}>
                     <Text style={styles.navButtonText}>Forgot Password?</Text>
+                </TouchableOpacity> */}
+                <TouchableOpacity
+                style={styles.forgot_button}
+                onPress={() => {}} // implement navigation to Register Screen
+                > 
+                    <Text style={styles.navButtonText}>
+                        Don't have an account? Create one here
+                    </Text>
                 </TouchableOpacity>
+                
+
+                <View style={{flexDirection:"row", alignItems:"center"}}>
+                    <View style={{flex: 1, height: 1, backgroundColor:"white", marginStart:15}} />
+                    <Text style={[styles.navButtonText, {paddingHorizontal:15} ]}>or Login with</Text>
+                    <View style={{flex: 1, height: 1, backgroundColor:"white", marginEnd:15}} />
+                </View>
 
                 <View>
-                    <Text style={[styles.navButtonText, {paddingStart:10}]}>...Or Login with:</Text>
-                    <View style={{flexDirection:"row",justifyContent:"space-between", alignSelf:"center"}}>
+                    {/* <Text style={[styles.navButtonText, {paddingStart:10}]}>...Or Login with:</Text> */}
+                    <View style={{flexDirection:"row",justifyContent:"space-between", alignSelf:"center", marginTop:10}}>
                         <SocialMediaButton 
                         buttonTitle="Facebook"
                         btnType="facebook"
@@ -66,6 +93,8 @@ export default function Login({navigation}) {
                         />
                     </View>
                 </View>
+
+
             </SafeAreaView>
             ) : null}
         </>
@@ -89,7 +118,8 @@ const styles = StyleSheet.create({
     },
 
     forgot_button: {
-    marginVertical: 35,
+        marginTop:30,
+        marginBottom:45
     },
 
     navButton: {
