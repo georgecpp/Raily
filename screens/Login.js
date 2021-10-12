@@ -5,6 +5,7 @@ import { Platform } from "react-native";
 import FormInput from "../components/FormInput";
 import FormButton from "../components/FormButton";
 import SocialMediaButton from "../components/SocialMediaButton";
+// import LinearGradient from "react-native-linear-gradient";
 // Implement & Import AuthContext
 
 
@@ -52,16 +53,15 @@ export default function Login({navigation}) {
                         <SocialMediaButton 
                         buttonTitle="Facebook"
                         btnType="facebook"
-                        color="#4867aa"
-                        backgroundColor="#dae2f1"
+                        color="white"
+                        backgroundColors={["#4c669f", "#3b5998", "#192f6a"]}
                         onPress={() => {}} // implement Facebook Login - AuthContext
                         />
-
                         <SocialMediaButton 
                         buttonTitle="Instagram"
                         btnType="instagram"
-                        color="#E1306C"
-                        backgroundColor="#f9d2df"
+                        color="white"
+                        backgroundColors={["#405DE6", "#5851D8", "#833AB4", "#C13584", "#E1306C", "#FD1D1D", "#F56040", "#F77737", "#FCAF45", "#FFDC80"]}
                         onPress={() => {}} // implement Instagram Login - AuthContext
                         />
                     </View>
@@ -99,8 +99,7 @@ const styles = StyleSheet.create({
     navButtonText: {
         fontSize: 18,
         fontWeight: "500",
-        color: "#5865F2",
+        color: "#ffffff",
         fontFamily: "Lato-Regular",
     },
-
 });
