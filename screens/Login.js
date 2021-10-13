@@ -8,6 +8,7 @@ import SocialMediaButton from "../components/SocialMediaButton";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 import Divider from "react-native-divider";
 import { windowWidth, windowHeight } from "../utils/Dimensions";
+import { loginValidation } from "../utils/Validation";
 // import LinearGradient from "react-native-linear-gradient";
 // Implement & Import AuthContext
 
@@ -58,7 +59,16 @@ export default function Login({navigation}) {
 
                 <FormButton 
                     buttonTitle="Sign In"
-                    onPress={() => {}} // implement Login - AuthContext
+                    onPress={() => {
+                        // Validate data before login operation
+                        const {error} = loginValidation({email,password});
+                        if(error) {
+                            console.log(error.details[0].message); // Will pop-up to user actually.
+                            return;
+                        }
+
+                        // implement Login - AuthContext
+                    }} 
                 />                
 
                 <View style={{flexDirection:"row", alignItems:"center", marginTop:75}}>
