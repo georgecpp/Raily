@@ -7,6 +7,7 @@ import FormButton from "../components/FormButton";
 import SocialMediaButton from "../components/SocialMediaButton";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 import Divider from "react-native-divider";
+import { windowWidth, windowHeight } from "../utils/Dimensions";
 // import LinearGradient from "react-native-linear-gradient";
 // Implement & Import AuthContext
 
@@ -46,29 +47,21 @@ export default function Login({navigation}) {
                             fillColor="#5865F2"
                             onPress={(checkboxValue) => setKeepLoggedIn(checkboxValue)} // implement Keep Me Logged In. 
                         />
-                        <Text style={{marginEnd:10, color:"white"}}>Keep me logged in</Text>
+                        <Text style={{marginEnd:10, color:"white"}}>Keep me logged in</Text>                        
+                        <TouchableOpacity style={{flex: 1, marginStart:windowWidth/15}} onPress={() => {}} // implement forgot password
+                        >
+                             <Text style={styles.forgotButtonText}>Forgot Password?</Text>
+                        </TouchableOpacity>
+
                     </View>
                 </View>
 
                 <FormButton 
                     buttonTitle="Sign In"
                     onPress={() => {}} // implement Login - AuthContext
-                />
+                />                
 
-                {/* <TouchableOpacity style={styles.forgot_button} onPress={() => {}}>
-                    <Text style={styles.navButtonText}>Forgot Password?</Text>
-                </TouchableOpacity> */}
-                <TouchableOpacity
-                style={styles.forgot_button}
-                onPress={() => {}} // implement navigation to Register Screen
-                > 
-                    <Text style={styles.navButtonText}>
-                        Don't have an account? Create one here
-                    </Text>
-                </TouchableOpacity>
-                
-
-                <View style={{flexDirection:"row", alignItems:"center"}}>
+                <View style={{flexDirection:"row", alignItems:"center", marginTop:75}}>
                     <View style={{flex: 1, height: 1, backgroundColor:"white", marginStart:15}} />
                     <Text style={[styles.navButtonText, {paddingHorizontal:15} ]}>or Login with</Text>
                     <View style={{flex: 1, height: 1, backgroundColor:"white", marginEnd:15}} />
@@ -94,6 +87,20 @@ export default function Login({navigation}) {
                     </View>
                 </View>
 
+                <TouchableOpacity
+                style={styles.signupNav}
+                onPress={() => {}} // implement navigation to Register Screen
+                > 
+                    <View style={{flexDirection:"row"}}>
+                        <Text style={styles.navButtonText}>
+                            Don't have an account?
+                        </Text>
+                        <Text style={[styles.navButtonText, {color:"#5865F2", marginLeft:10}]}>
+                        Sign Up
+                        </Text>
+                    </View>
+                </TouchableOpacity>
+
 
             </SafeAreaView>
             ) : null}
@@ -117,9 +124,10 @@ const styles = StyleSheet.create({
         resizeMode: 'center'
     },
 
-    forgot_button: {
-        marginTop:30,
-        marginBottom:45
+    signupNav: {
+        flex:1,
+        justifyContent:"flex-end",
+        marginBottom:25
     },
 
     navButton: {
@@ -132,4 +140,10 @@ const styles = StyleSheet.create({
         color: "#ffffff",
         fontFamily: "Lato-Regular",
     },
+
+    forgotButtonText : {
+        fontWeight: "500",
+        color: "white",
+        fontFamily: "Lato-Regular",
+    }
 });
