@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "484570899911",
+    "project_id": "raily-1634151305966",
+    "storage_bucket": "raily-1634151305966.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:484570899911:android:8834e7db037af1588f25e2",
+        "android_client_info": {
+          "package_name": "com.raily"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "484570899911-sft9hsklddud6u2orb2bo38k5r2a64is.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.raily",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "484570899911-12kcvtbp4vkh23fodm0qu58n9iapq58p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA-Z3bJ0A0wVtAMWP7HqztbN5_wRtE0b-M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "484570899911-12kcvtbp4vkh23fodm0qu58n9iapq58p.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

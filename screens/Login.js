@@ -10,10 +10,17 @@ import Divider from "react-native-divider";
 import { windowWidth, windowHeight } from "../utils/Dimensions";
 import { loginValidation } from "../utils/Validation";
 import { AccessToken, LoginManager } from "react-native-fbsdk-next";
+import { GoogleSignin, statusCodes } from "@react-native-google-signin/google-signin";
+import { GoogleSigninButton } from "@react-native-google-signin/google-signin";
+import { GoogleSigninButtonProps } from "@react-native-google-signin/google-signin/lib/typescript/GoogleSigninButton";
+
 // Implement & Import AuthContext
 
 
 export default function Login({navigation}) {
+    GoogleSignin.configure({
+        webClientId: '484570899911-12kcvtbp4vkh23fodm0qu58n9iapq58p.apps.googleusercontent.com',
+    });
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
     const [keepLoggedIn, setKeepLoggedIn] = useState("false");
@@ -118,12 +125,35 @@ export default function Login({navigation}) {
                         }} 
                         />
                         <SocialMediaButton 
-                        buttonTitle="Instagram"
-                        btnType="instagram"
-                        color="white"
-                        backgroundColors={["#405DE6", "#5851D8", "#833AB4", "#C13584", "#E1306C", "#FD1D1D", "#F56040", "#F77737", "#FCAF45", "#FFDC80"]}
-                        onPress={() => {}} // implement Instagram Login - AuthContext
+                        buttonTitle="Google"
+                        btnType="google"
+                        color="black"
+                        backgroundColors={["#ffffff", "#ffffff"]}
+                        onPress={async () => {
+                            try {   
+
+                                // Get the users ID token
+                                const {idToken} = await GoogleSignin.signIn();
+                                console.log(idToken);
+
+                                // Create a Google credential with the token
+
+                                // Sign-in the user with the credential
+                            }
+                            catch(error) {
+                                if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+                                    // user cancelled the login flow
+                                  } else if (error.code === statusCodes.IN_PROGRESS) {
+                                    // operation (e.g. sign in) is in progress already
+                                  } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
+                                    // play services not available or outdated
+                                  } else {
+                                    // some other error happened
+                                  }
+                            }  
+                        }} // implement Google Sign In - AuthContext
                         />
+                        
                     </View>
                 </View>
 
@@ -140,6 +170,7 @@ export default function Login({navigation}) {
                         </Text>
                     </View>
                 </TouchableOpacity>
+
 
 
             </SafeAreaView>
