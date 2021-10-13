@@ -9,7 +9,7 @@ import BouncyCheckbox from "react-native-bouncy-checkbox";
 import Divider from "react-native-divider";
 import { windowWidth, windowHeight } from "../utils/Dimensions";
 import { loginValidation } from "../utils/Validation";
-// import LinearGradient from "react-native-linear-gradient";
+import { AccessToken, LoginManager } from "react-native-fbsdk-next";
 // Implement & Import AuthContext
 
 
@@ -85,7 +85,37 @@ export default function Login({navigation}) {
                         btnType="facebook"
                         color="white"
                         backgroundColors={["#4c669f", "#3b5998", "#192f6a"]}
-                        onPress={() => {}} // implement Facebook Login - AuthContext
+                        onPress={async () => {
+                                await LoginManager.logInWithPermissions(["public_profile", "email"]).then(
+                                async function(result) {
+                                    if(result.isCancelled) {
+                                        console.log("Login cancelled.");
+                                    }
+                                    else {
+                                        console.log(
+                                            "Login success with permissions: " +
+                                                result.grantedPermissions.toString()
+                                          );
+                                          
+                                          // Once signed in, get the user's AcessToken
+                                          const data = await AccessToken.getCurrentAccessToken();
+                                          if(!data) {
+                                              console.log("Something went wrong obtaining access token");
+                                          }
+                                          else{
+                                              console.log(data);
+                                          }
+
+                                          // now create a MongoDb credential with the AccessToken
+
+                                          // Sign-in user with the credential.
+                                    }
+                                },
+                                function(error) {
+                                    console.log("Login fail with error: "+error);
+                                }
+                            );
+                        }} 
                         />
                         <SocialMediaButton 
                         buttonTitle="Instagram"
