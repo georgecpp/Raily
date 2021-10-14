@@ -10,15 +10,22 @@ export default function SocialMediaButton({
     btnType,
     color,
     backgroundColors,
+    source,
+    marginLeftIcon,
+    marginRightText,
     ...rest
 }) {
+    let marginLeftIconIn = marginLeftIcon ? marginLeftIcon : 0; 
+    let marginRightTextIn = marginRightText ? marginRightText : 0;
     return (
         <>
             <LinearGradient colors={backgroundColors} style={styles.linearGradient}
                 start={{ y: 0.0, x: 0.0 }} end={{ y: 0.0, x: 1.0 }}> 
                     <TouchableOpacity style={{flexDirection:"row"}} {...rest}>
                         <View style={styles.iconWrapper}>
-                            <FontAwesome name={btnType} style={styles.icon} size={22} color={color}/>
+                            {!source ? (
+                              <FontAwesome name={btnType} style={styles.icon} size={25} color={color}/>
+                            ) : <Image source={source} style={{resizeMode:"center", width:25, height:25, marginLeft:marginLeftIconIn}} />}
                         </View>
                         <View style={styles.btnTextWrapper}>
                             <Text style={[styles.buttonText, {color: color}]}>{buttonTitle}</Text>
@@ -61,7 +68,7 @@ const styles = StyleSheet.create({
     btnTextWrapper: {
         flex: 1,
         justifyContent: "center",
-        alignItems: "center"
+        alignItems: "center",
     },
 
     buttonText: {

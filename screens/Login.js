@@ -129,6 +129,8 @@ export default function Login({navigation}) {
                         btnType="google"
                         color="black"
                         backgroundColors={["#ffffff", "#ffffff"]}
+                        source={require("../assets/icons/search.png")}
+                        marginLeftIcon={5}
                         onPress={async () => {
                             try {   
 
