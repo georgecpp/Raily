@@ -215,6 +215,7 @@ const styles = StyleSheet.create({
     },
 
     forgotButtonText : {
+        fontSize:windowWidth*0.032,
         fontWeight: "500",
         color: "white",
         fontFamily: "Lato-Regular",
