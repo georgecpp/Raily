@@ -1,7 +1,6 @@
-import * as React from "react";
-import Login from "./screens/Login";
-import Register from './screens/Register'
+import React from "react";
+import Providers from "./navigation";
 
 export default function App() {
-  return <Register />;
+  return <Providers />;
 }

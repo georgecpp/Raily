@@ -161,7 +161,7 @@ export default function Login({navigation}) {
 
                 <TouchableOpacity
                 style={styles.signupNav}
-                onPress={() => {}} // implement navigation to Register Screen
+                onPress={() => {navigation.navigate('Register')}} // implement navigation to Register Screen
                 > 
                     <View style={{flexDirection:"row"}}>
                         <Text style={styles.navButtonText}>
