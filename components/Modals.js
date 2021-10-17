@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Alert, Modal, StyleSheet, Text, Pressable, View } from "react-native";
 
 const MyModal = ({modalVisible,setModalVisible,message,setMessage}) => {
-  console.log("Aici "+message)
+
   return (
     <View style={styles.centeredView}>
       <Modal
