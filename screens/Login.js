@@ -18,6 +18,8 @@ import { GoogleSigninButtonProps } from "@react-native-google-signin/google-sign
 
 
 export default function Login({navigation}) {
+    const [modalVisible, setModalVisible] = useState(false);
+    const [errorMessage,setErrorMessage]=useState();
     GoogleSignin.configure({
         webClientId: '484570899911-12kcvtbp4vkh23fodm0qu58n9iapq58p.apps.googleusercontent.com',
     });
@@ -174,7 +176,8 @@ export default function Login({navigation}) {
                 </TouchableOpacity>
 
 
-
+            {errorMessage?<MyModal setModalVisible={setModalVisible} modalVisible={modalVisible} message={errorMessage} setMessage={setErrorMessage}>
+                </MyModal>:null}   
             </SafeAreaView>
             ) : null}
         </>

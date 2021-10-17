@@ -14,11 +14,13 @@ import { AccessToken, LoginManager } from "react-native-fbsdk-next";
 import { GoogleSignin, statusCodes } from "@react-native-google-signin/google-signin";
 import { GoogleSigninButton } from "@react-native-google-signin/google-signin";
 import { GoogleSigninButtonProps } from "@react-native-google-signin/google-signin/lib/typescript/GoogleSigninButton";
-
+import MyModal from "../components/Modals";
 // Implement & Import AuthContext
 
 
 export default function Register({navigation}) {
+    const [modalVisible, setModalVisible] = useState(false);
+    const [errorMessage,setErrorMessage]=useState();
     GoogleSignin.configure({
         webClientId: '484570899911-12kcvtbp4vkh23fodm0qu58n9iapq58p.apps.googleusercontent.com',
     });
@@ -32,8 +34,8 @@ export default function Register({navigation}) {
         {/* handle Platform if Android or iOS */}
         {Platform.OS === 'android' ? (
             <SafeAreaView style={styles.containerSafeAreaAndroid}>
-                    <Text style={styles.RegisterText}>Register</Text> 
-
+                <Text style={styles.RegisterText}>Register</Text> 
+                
                 <View>
                     <FormInput 
                         labelValue={email}
@@ -67,17 +69,17 @@ export default function Register({navigation}) {
                         // Validate data before login operation
                         const {error} = registerValidation({email,password,confirmPassword});
                         if(error) {
+                            setErrorMessage(error.details[0].message);
+                            setModalVisible(true);
                             console.log(error.details[0].message); // Will pop-up to user actually.
                             return;
                         }
 
                         // implement Login - AuthContext
                     }} 
-                />                
-
- 
-
-
+                />
+                {errorMessage?<MyModal setModalVisible={setModalVisible} modalVisible={modalVisible} message={errorMessage} setMessage={setErrorMessage}>
+                </MyModal>:null}           
             </SafeAreaView>
             ) : null}
         </>
